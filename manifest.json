@@ -14,10 +14,6 @@
     "default_popup": "list.html"
   },
 
-  "background":{
-    "scripts": ["background.js"]
-  },
-
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",

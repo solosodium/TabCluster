@@ -1,15 +1,22 @@
 html, body {
-  background: #EEE;
-  color: #555;
+  background: #FFF;
+  color: #222;
   font-family: Helvetica, Arial, serif;
   min-width: 300px;
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 16px;
+}
+
+img {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 
 p,a {
-  color: #555;
-  font-size: 16px;
+  color: #222;
+  font-size: 12px;
 }
