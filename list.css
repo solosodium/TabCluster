@@ -1,0 +1,15 @@
+html, body {
+  background: #EEE;
+  color: #555;
+  font-family: Helvetica, Arial, serif;
+  min-width: 300px;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+p,a {
+  color: #555;
+  font-size: 16px;
+}
