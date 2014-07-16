@@ -23,7 +23,15 @@ $(document).ready(function(){
         // for inner panel value
         var inner = "";
         for (var k=0; k<sorted_tabs[key].length; k++) {
-          inner += "<div class='panel' id='" + sorted_tabs[key][k].id + "'><input type='image' src='closeicon.png' id='close" + sorted_tabs[key][k].id + "'><a href='#' id='tab" + sorted_tabs[key][k].id + "'>" + sorted_tabs[key][k].title + "</a></div>";
+          // check if this tab if active or highlighted
+          var close_icon_url;
+          if (sorted_tabs[key][k].highlighted || sorted_tabs[key][k].active) {
+            close_icon_url = "closeicon_n.png";
+          }
+          else {
+            close_icon_url = "closeicon.png";
+          }
+          inner += "<div class='panel' id='" + sorted_tabs[key][k].id + "'><input type='image' src='" + close_icon_url + "' id='close" + sorted_tabs[key][k].id + "'><a href='#' id='tab" + sorted_tabs[key][k].id + "'>" + sorted_tabs[key][k].title + "</a></div>";
         }
         // print root url and favicon
         if (sorted_tabs[key][0].favIconUrl === undefined || key.indexOf('chrome://') > -1) {
@@ -38,15 +46,19 @@ $(document).ready(function(){
         var tab_id = tabs[k].id;
         // set tab link click event
         $("#tab" + tab_id).click(function() {
-          chrome.tabs.update(parseInt($(this).attr('id').replace('tab', '')), {"active":true, "highlighted":true}, function(tab) {
-            window.close();
-          });
+          chrome.tabs.update(parseInt($(this).attr('id').replace('tab', '')), {"active":true, "highlighted":true}, null);
         });
         // set close click event
         $("#close" + tab_id).click(function() {
-          chrome.tabs.remove(parseInt($(this).attr('id').replace('close', '')), function() {
-            //window.close();
+          chrome.tabs.get(parseInt($(this).attr('id').replace('close', '')), function(tab) {
+            if (tab.highlighted || tab.active) {
+              // nothing should happen here
+            }
+            else {
+              chrome.tabs.remove(tab.id, null);
+            }
           });
+
         });
       }
     });
@@ -65,12 +77,9 @@ $(document).ready(function(){
   sortTabs();
 
   // set on update listener
-  chrome.tabs.onRemoved.addListener(function(tabId, changeInfo, tab) {
+  chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
     // Bug fix: current tab closed cause freeze
     $("#" + tabId).remove();
-    if (tab.highlighted) {
-      window.close();
-    }
   });
 
 });
