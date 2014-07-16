@@ -22,7 +22,19 @@ p,a {
   padding: 0px;
 }
 
-a:focus, a:active{
+a:focus, a:active {
+  outline:none;
+}
+
+input {
+  width: 15px;
+  height: 15px;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 2px;
+}
+
+input:focus, input:active {
   outline:none;
 }
 

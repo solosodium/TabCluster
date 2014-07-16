@@ -23,7 +23,7 @@ $(document).ready(function(){
         // for inner panel value
         var inner = "";
         for (var k=0; k<sorted_tabs[key].length; k++) {
-          inner += "<div class='panel'><a href='#' id='" + sorted_tabs[key][k].id + "'>" + sorted_tabs[key][k].title + "</a></div>";
+          inner += "<div class='panel' id='" + sorted_tabs[key][k].id + "'><input type='image' src='closeicon.png' id='close" + sorted_tabs[key][k].id + "'><a href='#' id='tab" + sorted_tabs[key][k].id + "'>" + sorted_tabs[key][k].title + "</a></div>";
         }
         // print root url and favicon
         if (sorted_tabs[key][0].favIconUrl === undefined || key.indexOf('chrome://') > -1) {
@@ -36,9 +36,16 @@ $(document).ready(function(){
       for (var k=0; k<tabs.length; k++) {
         // get the tab id
         var tab_id = tabs[k].id;
-        $("#" + tab_id).click(function() {
-          chrome.tabs.update(parseInt($(this).attr('id')), {"active":true, "highlighted":true}, function(tab) {
+        // set tab link click event
+        $("#tab" + tab_id).click(function() {
+          chrome.tabs.update(parseInt($(this).attr('id').replace('tab', '')), {"active":true, "highlighted":true}, function(tab) {
             window.close();
+          });
+        });
+        // set close click event
+        $("#close" + tab_id).click(function() {
+          chrome.tabs.remove(parseInt($(this).attr('id').replace('close', '')), function() {
+            //window.close();
           });
         });
       }
@@ -56,5 +63,14 @@ $(document).ready(function(){
 
   // main function
   sortTabs();
+
+  // set on update listener
+  chrome.tabs.onRemoved.addListener(function(tabId, changeInfo, tab) {
+    // Bug fix: current tab closed cause freeze
+    $("#" + tabId).remove();
+    if (tab.highlighted) {
+      window.close();
+    }
+  });
 
 });

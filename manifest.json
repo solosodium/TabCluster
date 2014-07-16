@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "Easy Tabs",
+  "name": "Easy Tab Clusters",
   "description": "Extension to cluster tabs with the same root URL.",
-  "version": "1.1",
+  "version": "1.4",
 
   "permissions": [
     "tabs"
