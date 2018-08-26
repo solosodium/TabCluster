@@ -3,7 +3,7 @@
 
   "name": "Easy Tab Clusters",
   "description": "Extension to cluster tabs with the same root URL.",
-  "version": "1.6",
+  "version": "1.8",
 
   "permissions": [
     "tabs"

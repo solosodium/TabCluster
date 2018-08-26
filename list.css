@@ -1,7 +1,8 @@
 html, body {
-  background: #3e3e3e;
+  background: #eeeeee;
   color: #222222;
-  font-family: Helvetica, Arial, serif;
+  font-family: Helvetica, sans-serif;
+  font-size: 1em;
   min-width: 300px;
   margin: 0px;
   padding: 0px;
@@ -39,20 +40,17 @@ input:focus, input:active {
 }
 
 .label {
-  background: #d2d2d2;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  padding: 5px;
+  background: #eeeeee;
+  border-radius: 2px;
+  padding: 2px;
   margin: 10px;
 }
 
 .panel {
-  background: #f5f5f5;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
+  background: #ffffff;
+  border-radius: 2px;
   padding: 5px;
   margin: 5px;
   margin-left: 25px;
+  box-shadow: 2px 2px 2px #999999;
 }
